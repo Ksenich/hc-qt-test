@@ -1,8 +1,10 @@
 #include "MainWidget.hpp"
 
-MainWidget::MainWidget(QWidget* parent, Qt::WindowFlags f = 0):
-        QWidget(parent,f )
-        
+MainWidget::MainWidget(QWidget* parent):
+        QWidget(parent)
 {
-            
+}
+
+void MainWidget::setFrameless(bool b){
+
 }

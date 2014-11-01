@@ -1,10 +1,11 @@
 #include <QApplication>
 
-#include "MainWidget.hpp"
-
-inat main(int argc char** argv){
+#include "SwitcherWidget.h"
+#include "mainwindow.h"
+int main(int argc, char** argv){
     QApplication app(argc, argv);
-    MainWidget mw;
+    //SwitcherWidget mw;
+    MainWindow mw;
     mw.show();
     app.exec();
     return 0;
