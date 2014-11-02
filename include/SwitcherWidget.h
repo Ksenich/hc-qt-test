@@ -1,3 +1,6 @@
+#ifndef SWITCHER_WIDGET
+#define SWITCHER_WIDGET
+
 #include <QWidget>
 #include <QPaintEvent>
 #include <QMouseEvent>
@@ -42,3 +45,5 @@ private:
     QParallelAnimationGroup ani;
     QFont monospace;
 };
+
+#endif

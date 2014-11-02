@@ -16,7 +16,7 @@ QColor SwitcherWidget::onColor(146, 220, 92);
 SwitcherWidget::SwitcherWidget(QWidget * parent):
         QWidget(parent/*, Qt::FramelessWindowHint*/)
 {
-	QString fontName(QLatin1String("font/AlternateGotNo3D.ttf"));
+    QString fontName(QLatin1String(":/font/AlternateGotNo3D.ttf"));
     int id = QFontDatabase::addApplicationFont(fontName);
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     monospace = QFont(family);

@@ -1,5 +1,5 @@
 TEMPLATE = app
-CONFIG += qt designer
+CONFIG += qt
 QT += widgets
 
 DESTDIR = out
@@ -7,23 +7,17 @@ DESTDIR = out
 INCLUDEPATH +=  "include"
 
 HEADERS = \
-    #include/MainWidget.hpp \
     include/mainwindow.h \
     include/SwitcherWidget.h \
-    windowhead.h \
-    switcherif.h
-
+    cui_mainwindowframeless.h \
+    cui_mainwindowframed.h \
+    cui_header.h
 
 SOURCES = src/main.cpp \
-    #src/MainWidget.cpp \
     src/SwitcherWidget.cpp \
     src/mainwindow.cpp \
-    windowhead.cpp \
-    switcherif.cpp
-    
+    cui_mainwindowframeless.cpp \
+    cui_mainwindowframed.cpp \
+    cui_header.cpp
 
-FORMS += \
-    mainwindow.ui \
-    windowhead.ui
-
-OTHER_FILES += font/AlternateGotNo3D.ttf
+RESOURCES += app.qrc
