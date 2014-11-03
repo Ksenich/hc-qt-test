@@ -15,17 +15,12 @@ CentralWidget::CentralWidget(QWidget *parent) :
     //fw(new FramelessWindow(0))
 {
     ui->setupUi(this);
-    QString fontName(QLatin1String(":/font/AlternateGotNo3D.ttf"));
-    int id = QFontDatabase::addApplicationFont(fontName);
-    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    QFont fontUsed = QFont(family);
-    fontUsed.setPointSize(20);
-//    QPalette textPalette = palette();
-//    textPalette.setColor(QPalette::WindowText, QColor(204,204,204));
-//    textPalette.setColor(QPalette::Window, QColor(255,255,255));
-//    setPalette(textPalette);
-    ui->label->setFont(fontUsed);
-//    ui->label->setPalette(textPalette);
+    //QString fontName(QLatin1String(":/font/AlternateGotNo3D.ttf"));
+    //int id = QFontDatabase::addApplicationFont(fontName);
+    //QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    //QFont fontUsed = QFont(family);
+    //fontUsed.setPointSize(14);
+    //ui->label->setFont(fontUsed);
     connect(ui->switcher, SIGNAL(switched(bool)), this, SLOT(setFrameless(bool)));
 }
 
@@ -33,12 +28,9 @@ CentralWidget::~CentralWidget()
 {
     delete ui;
 }
-FramelessWindow * fw=0;
 void CentralWidget::setFrameless(bool f){
+    static FramelessWindow* fw = new FramelessWindow;
     if(f){
-        if(fw == 0){
-            fw = new FramelessWindow;
-        }
         fw->move(pos());
         fw->setBody(this);
         fw->show();

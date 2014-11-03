@@ -41,7 +41,7 @@ void SwitcherWidget::drawBase(QPainter& paint)
     paint.drawRect(switchHCWidth,0,base.width()-switchHCWidth*2, base.height());
     paint.drawPie(0, 0, base.height(), base.height(), 90 * 16, 180 * 16);
     paint.drawPie(base.width()-base.height(), 0, base.height(), base.height(), -90 * 16, 180 * 16);
-    fontUsed.setPointSize(40);
+    fontUsed.setPointSize(20);
     paint.setFont(fontUsed);
     paint.setPen(QPen(QColor(255,255,255), 10));
     //knob low x

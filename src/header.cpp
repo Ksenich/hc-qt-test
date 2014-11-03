@@ -9,10 +9,6 @@ HeaderWidget::HeaderWidget(QWidget *parent) :
     ui(new Ui::header)
 {
     ui->setupUi(this);
-    QPalette p;
-    p.setColor(QPalette::Window, QColor(252, 250, 247));
-    setPalette(p);
-    //setStyleSheet("background-color:black;");
 }
 
 HeaderWidget::~HeaderWidget()
