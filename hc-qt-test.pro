@@ -7,17 +7,20 @@ DESTDIR = out
 INCLUDEPATH +=  "include"
 
 HEADERS = \
-    include/mainwindow.h \
-    include/SwitcherWidget.h \
-    cui_mainwindowframeless.h \
-    cui_mainwindowframed.h \
-    cui_header.h
+    include/header.h \
+    include/centralwidget.h \
+    include/framelesswindow.h \
+    include/switcherwidget.h
 
 SOURCES = src/main.cpp \
-    src/SwitcherWidget.cpp \
-    src/mainwindow.cpp \
-    cui_mainwindowframeless.cpp \
-    cui_mainwindowframed.cpp \
-    cui_header.cpp
+    src/header.cpp \
+    src/centralwidget.cpp \
+    src/framelesswindow.cpp \
+    src/switcherwidget.cpp
 
 RESOURCES += app.qrc
+
+FORMS += \
+    forms/header.ui \
+    forms/centralwidget.ui \
+    forms/framelesswindow.ui
