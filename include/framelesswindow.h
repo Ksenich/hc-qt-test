@@ -21,6 +21,10 @@ private:
     Ui::FramelessWindow *ui;
     int invFW();
     int invFH();
+private slots:
+    void maximise();
+    void restore();
+    void moveBy(int x, int y);
 };
 
 #endif // FRAMELESSWINDOW_H

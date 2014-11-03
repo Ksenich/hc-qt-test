@@ -17,6 +17,13 @@ FramelessWindow::FramelessWindow(QWidget *parent) :
     QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect(this);
     effect->setBlurRadius(50);
     effect->setOffset(0,0);
+    connect(ui->header, SIGNAL(closeClicked()), QApplication::instance(), SLOT(quit()));
+    connect(ui->header, SIGNAL(minimizeClicked()), this, SLOT(showMinimized()));
+    connect(ui->header, SIGNAL(maximizeClicked()), this, SLOT(showMaximized()));
+    connect(ui->header, SIGNAL(maximizeClicked()), this, SLOT(maximise()));
+    connect(ui->header, SIGNAL(restoreClicked()), this, SLOT(showNormal()));
+    connect(ui->header, SIGNAL(restoreClicked()), this, SLOT(restore()));
+    connect(ui->header, SIGNAL(dragged(int,int)), this, SLOT(moveBy(int,int)));
     //ui->holder->setGraphicsEffect(effect);
 }
 
@@ -51,4 +58,19 @@ int FramelessWindow::invFW()
 int FramelessWindow::invFH()
 {
     return 11;
+}
+
+void FramelessWindow::maximise()
+{
+    layout()->setMargin(0);
+}
+
+void FramelessWindow::restore()
+{
+    layout()->setMargin(9);
+}
+
+void FramelessWindow::moveBy(int x, int y)
+{
+    move(pos().x() + x, pos().y() + y);
 }
