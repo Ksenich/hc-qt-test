@@ -35,7 +35,7 @@ private:
     bool isOn;
     
     //Viewdetails------------------------
-    int tumblerMargin, px;
+    int knobMargin, px;
     QBrush baseBrush, knobBrush;
     static QColor onColor, offColor;
     QRect base;
@@ -46,7 +46,7 @@ private:
     QColor getColor();
     QColor baseColor;
     QParallelAnimationGroup ani;
-    QFont monospace;
+    QFont fontUsed;
 };
 
 #endif

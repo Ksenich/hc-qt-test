@@ -1,5 +1,6 @@
 #include <Qt>
 #include <QGraphicsDropShadowEffect>
+#include <QDebug>
 
 #include "framelesswindow.h"
 #include "ui_framelesswindow.h"
@@ -24,6 +25,35 @@ FramelessWindow::~FramelessWindow()
     delete ui;
 }
 
-void FramelessWindow::setBody(QWidget *w){
-    ui->body->addWidget(w);
+void FramelessWindow::setBody(QWidget *qw){
+
+    int h = ui->header->height() + qw->height();
+    int w = qw->width();
+    qDebug() << size() << ui->holder->size() << ui->header->size();
+    resize(w,h);
+    qDebug() << size() << ui->holder->size() << ui->header->size()
+             << (size() - ui->holder->size());
+    ui->body->addWidget(qw);
+    qDebug() << size() << ui->holder->size() << ui->header->size()
+             << (size() - ui->holder->size());
+}
+
+QSize FramelessWindow::visibleGeometry()
+{
+    return ui->holder->size();
+}
+
+void FramelessWindow::resize(int w, int h)
+{
+    QWidget::resize(w + invFW()*2, h + invFH()*2);
+}
+
+int FramelessWindow::invFW()
+{
+    return 11;
+}
+
+int FramelessWindow::invFH()
+{
+    return 11;
 }

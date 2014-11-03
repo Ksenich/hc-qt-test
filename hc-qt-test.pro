@@ -10,7 +10,8 @@ HEADERS = \
     include/header.h \
     include/centralwidget.h \
     include/framelesswindow.h \
-    include/switcherwidget.h
+    include/switcherwidget.h \
+    include/constants.h
 
 SOURCES = src/main.cpp \
     src/header.cpp \
