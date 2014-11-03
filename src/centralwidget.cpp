@@ -15,12 +15,12 @@ CentralWidget::CentralWidget(QWidget *parent) :
     //fw(new FramelessWindow(0))
 {
     ui->setupUi(this);
-    //QString fontName(QLatin1String(":/font/AlternateGotNo3D.ttf"));
-    //int id = QFontDatabase::addApplicationFont(fontName);
-    //QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    //QFont fontUsed = QFont(family);
-    //fontUsed.setPointSize(14);
-    //ui->label->setFont(fontUsed);
+    QString fontName(QLatin1String(":/font/AlternateGotNo3D.ttf"));
+    int id = QFontDatabase::addApplicationFont(fontName);
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    QFont fontUsed = QFont(family);
+    fontUsed.setPointSize(14);
+    ui->label->setFont(fontUsed);
     connect(ui->switcher, SIGNAL(switched(bool)), this, SLOT(setFrameless(bool)));
 }
 
@@ -42,5 +42,4 @@ void CentralWidget::setFrameless(bool f){
         show();
         ui->switcher->startAnimation();
     }
-    qDebug() << size();
 }

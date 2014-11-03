@@ -27,15 +27,10 @@ FramelessWindow::~FramelessWindow()
 
 void FramelessWindow::setBody(QWidget *qw){
 
-    int h = ui->header->height() + qw->height();
-    int w = qw->width();
-    qDebug() << size() << ui->holder->size() << ui->header->size();
+    int h = ui->header->height() + qw->height() +12;
+    int w = qw->width() +12;
     resize(w,h);
-    qDebug() << size() << ui->holder->size() << ui->header->size()
-             << (size() - ui->holder->size());
     ui->body->addWidget(qw);
-    qDebug() << size() << ui->holder->size() << ui->header->size()
-             << (size() - ui->holder->size());
 }
 
 QSize FramelessWindow::visibleGeometry()
