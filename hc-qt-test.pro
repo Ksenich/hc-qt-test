@@ -11,13 +11,17 @@ HEADERS = \
     include/centralwidget.h \
     include/framelesswindow.h \
     include/switcherwidget.h \
-    include/constants.h
+    include/constants.h \
+    include/resizableframe.h \
+    include/mainwindow.h
 
 SOURCES = src/main.cpp \
     src/header.cpp \
     src/centralwidget.cpp \
     src/framelesswindow.cpp \
-    src/switcherwidget.cpp
+    src/switcherwidget.cpp \
+    src/resizableframe.cpp \
+    src/mainwindow.cpp
 
 RESOURCES += app.qrc
 

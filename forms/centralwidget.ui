@@ -56,7 +56,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1,1">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -78,7 +81,7 @@
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
+      <enum>QSizePolicy::Maximum</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -89,9 +92,12 @@
     </spacer>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1">
      <property name="spacing">
       <number>0</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SetFixedSize</enum>
      </property>
      <property name="topMargin">
       <number>0</number>
@@ -105,7 +111,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
+        <enum>QSizePolicy::Maximum</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -124,7 +130,7 @@
         <enum>Qt::Horizontal</enum>
        </property>
        <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
+        <enum>QSizePolicy::Maximum</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -266,7 +272,7 @@
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
+      <enum>QSizePolicy::Maximum</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>

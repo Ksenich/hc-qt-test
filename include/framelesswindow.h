@@ -2,6 +2,8 @@
 #define FRAMELESSWINDOW_H
 
 #include <QWidget>
+#include "header.h"
+#include "resizableframe.h"
 
 namespace Ui {
 class FramelessWindow;
@@ -17,14 +19,18 @@ public:
     void setBody(QWidget* w);
     QSize visibleGeometry();
     virtual void resize(int w, int h);
+    int width() const;
+    int height() const;
+    HeaderWidget *getHeader();
+    ResizableFrame *getFrame();
 private:
     Ui::FramelessWindow *ui;
-    int invFW();
-    int invFH();
+    int invFW() const;
+    int invFH() const;
 private slots:
     void maximise();
     void restore();
-    void moveBy(int x, int y);
+
 };
 
 #endif // FRAMELESSWINDOW_H

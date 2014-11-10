@@ -11,12 +11,13 @@
 
 #include "switcherwidget.h"
 #include "constants.h"
-
+const int maxPX = 1000;
 QColor SwitcherWidget::offColor(230, 222, 211);
 QColor SwitcherWidget::onColor(146, 220, 92);
 
 SwitcherWidget::SwitcherWidget(QWidget * parent):
-        QWidget(parent/*, Qt::FramelessWindowHint*/)
+        QWidget(parent/*, Qt::FramelessWindowHint*/),
+        base(0,0,442,238)
 {
     QString fontName(QLatin1String(":/font/AlternateGotNo3D.ttf"));
     int id = QFontDatabase::addApplicationFont(fontName);
@@ -55,14 +56,31 @@ void SwitcherWidget::drawKnob(QPainter& paint)
 {
     QSettings s(orgName, prodName);
     paint.setPen(QPen(QColor(255,255,255)));
-    knob.setRect(px + knobMargin,knobMargin, base.height() - knobMargin*2, base.height() - knobMargin*2);
+    knob.setRect((float(px)/maxPX)*(base.width() - base.height()) + knobMargin, knobMargin, base.height() - knobMargin*2, base.height() - knobMargin*2);
     paint.setBrush(knobBrush);
     paint.drawEllipse(knob);
 }
 
+void SwitcherWidget::scalePainter(QPainter& ){
+    int w = 442, h=238;
+    int k = 10;
+    float switcherRatio = float(w)/h;
+    float widgetRatio = width()/height();
+    float scale;
+    if (switcherRatio >= widgetRatio) {
+        scale = float(w)/width();
+    } else {
+        scale = float(h)/height();
+    }
+    base.setWidth(w/scale);
+    base.setHeight(h/scale);
+    knobMargin = k/scale;
+}
+
 void SwitcherWidget::paintEvent(QPaintEvent * event){
-    base.setRect(0,0,width(),height());
+    //base.setRect(0,0,width(),height());
     QPainter paint(this);
+    scalePainter(paint);
     drawBase(paint);
     drawKnob(paint);
     event->accept();
@@ -79,46 +97,61 @@ void SwitcherWidget::mousePressEvent ( QMouseEvent * event ) {
     event->accept();
 }
 
-void SwitcherWidget::setPX(int p){
+void SwitcherWidget::setPX(double p){
     px = p;
-    repaint();
+    //update();
 }
 
-int SwitcherWidget::getPX(){
+double SwitcherWidget::getPX(){
     return px;
 }
 
 void SwitcherWidget::setColor(QColor v){
     baseColor = v;
-    repaint();
+    update();
 }
 
 QColor SwitcherWidget::getColor(){
     return baseColor;
 }
 
-void SwitcherWidget::resizeEvent(QResizeEvent *){
-    if(isOn)
-        setPX(base.width() - base.height());
-}
-
 void SwitcherWidget::startAnimation(){
     ani.clear();
     QPropertyAnimation* slideAnimation = new QPropertyAnimation(this,"positionX",&ani);
     QPropertyAnimation* fadeAnimation= new QPropertyAnimation(this,"color", &ani);
-    slideAnimation->setEasingCurve(QEasingCurve(QEasingCurve::Linear));
-    fadeAnimation->setEasingCurve(QEasingCurve(QEasingCurve::Linear));
+//    slideAnimation->setEasingCurve(QEasingCurve(QEasingCurve::Linear));
+//    fadeAnimation->setEasingCurve(QEasingCurve(QEasingCurve::Linear));
     slideAnimation->setDuration(100);
     fadeAnimation->setDuration(100);
     if(isOn){
         fadeAnimation->setStartValue(offColor);
         fadeAnimation->setEndValue(onColor);
         slideAnimation->setStartValue(0);
-        slideAnimation->setEndValue(base.width() - base.height());
+        slideAnimation->setEndValue(maxPX);
     }else{
         fadeAnimation->setStartValue(onColor);
         fadeAnimation->setEndValue(offColor);
-        slideAnimation->setStartValue(base.width() - base.height());
+        slideAnimation->setStartValue(maxPX);
         slideAnimation->setEndValue(0);
     }
 }
+
+// Scale appropriately
+//void scale(){
+//    float switcherRatio = 442/238;//float imageSideRatio = (float)drawable.getIntrinsicWidth() / (float)drawable.getIntrinsicHeight();
+//    float widgetRatio = width()/height();//            float viewSideRatio = (float)MeasureSpec.getSize(widthMeasureSpec) / (float)MeasureSpec.getSize(heightMeasureSpec);
+//    if (switcherRatio >= widgetRatio) {
+//        // Image is wider than the display (ratio)
+//        int width = width();
+//        int height = (int)(width / switcherRatio);
+////                setMeasuredDimension(width, height);
+//        width,height;
+//    } else {
+//        // Image is taller than the display (ratio)
+//        int height = height();
+//        int width = (int)(height * switcherRatio);
+////                setMeasuredDimension(width, height);
+//        width,height;
+//    }
+
+//}

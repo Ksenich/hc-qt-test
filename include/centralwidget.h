@@ -16,11 +16,10 @@ class CentralWidget : public QWidget
 public:
     explicit CentralWidget(QWidget *parent = 0);
     ~CentralWidget();
+    SwitcherWidget *getSwitcher();
 private:
     Ui::CentralWidget *ui;
-   // FramelessWindow *fw;
-private slots:
-    void setFrameless(bool);
+
 };
 
 #endif // CENTRALWIDGET_H

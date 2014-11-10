@@ -13,6 +13,7 @@
 
 class SwitcherWidget : public QWidget{
     Q_OBJECT
+    //couldn't make it work with doubles
     Q_PROPERTY(int positionX READ getPX WRITE setPX)
     Q_PROPERTY(QColor color READ getColor WRITE setColor)
 public:
@@ -28,20 +29,20 @@ signals:
     void switched(bool);
 
 protected:
-    virtual void paintEvent(QPaintEvent * event);
-	virtual void mousePressEvent ( QMouseEvent * event ); 
-    virtual void resizeEvent(QResizeEvent *);
+    void paintEvent(QPaintEvent * event);
+    void mousePressEvent ( QMouseEvent * event );
 private:
     bool isOn;
     
     //Viewdetails------------------------
+    void scalePainter(QPainter& p);
     int knobMargin, px;
     QBrush baseBrush, knobBrush;
     static QColor onColor, offColor;
     QRect base;
     QRect knob;
-    void setPX(int);
-    int getPX();
+    void setPX(double);
+    double getPX();
     void setColor(QColor);
     QColor getColor();
     QColor baseColor;

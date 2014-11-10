@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QMouseEvent>
 #include <QPoint>
-#include <QDebug>
 
 #include "include\header.h"
 #include "ui_header.h"
@@ -43,7 +42,6 @@ void HeaderWidget::mouseMoveEvent(QMouseEvent *event)
 {
     if (event->buttons() & Qt::LeftButton) {
         QPoint offset(event->globalPos() - previousPos);
-        qDebug() << offset;
         dragged(offset.x(), offset.y());
         previousPos = event->globalPos();
         event->accept();
@@ -53,7 +51,6 @@ void HeaderWidget::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
         previousPos = event->globalPos();
-//        m_dragPosition = event->globalPos() - frameGeometry().topLeft();
         event->accept();
     }
 }

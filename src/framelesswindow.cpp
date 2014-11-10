@@ -1,6 +1,5 @@
 #include <Qt>
 #include <QGraphicsDropShadowEffect>
-#include <QDebug>
 
 #include "framelesswindow.h"
 #include "ui_framelesswindow.h"
@@ -13,18 +12,13 @@ FramelessWindow::FramelessWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_TranslucentBackground);
-    ui->holder->setAutoFillBackground(true);
+    ui->frame->setAutoFillBackground(true);
     QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect(this);
-    effect->setBlurRadius(50);
+    effect->setBlurRadius(5);
     effect->setOffset(0,0);
-    connect(ui->header, SIGNAL(closeClicked()), QApplication::instance(), SLOT(quit()));
-    connect(ui->header, SIGNAL(minimizeClicked()), this, SLOT(showMinimized()));
-    connect(ui->header, SIGNAL(maximizeClicked()), this, SLOT(showMaximized()));
-    connect(ui->header, SIGNAL(maximizeClicked()), this, SLOT(maximise()));
-    connect(ui->header, SIGNAL(restoreClicked()), this, SLOT(showNormal()));
     connect(ui->header, SIGNAL(restoreClicked()), this, SLOT(restore()));
-    connect(ui->header, SIGNAL(dragged(int,int)), this, SLOT(moveBy(int,int)));
-    //ui->holder->setGraphicsEffect(effect);
+    connect(ui->header, SIGNAL(maximizeClicked()), this, SLOT(maximise()));
+    ui->frame->setGraphicsEffect(effect);
 }
 
 FramelessWindow::~FramelessWindow()
@@ -42,7 +36,7 @@ void FramelessWindow::setBody(QWidget *qw){
 
 QSize FramelessWindow::visibleGeometry()
 {
-    return ui->holder->size();
+    return ui->frame->size();
 }
 
 void FramelessWindow::resize(int w, int h)
@@ -50,12 +44,32 @@ void FramelessWindow::resize(int w, int h)
     QWidget::resize(w + invFW()*2, h + invFH()*2);
 }
 
-int FramelessWindow::invFW()
+int FramelessWindow::width() const
+{
+    return QWidget::width() - invFW()*2;
+}
+
+int FramelessWindow::height() const
+{
+    return QWidget::height() - invFH()*2;
+}
+
+HeaderWidget *FramelessWindow::getHeader()
+{
+    return ui->header;
+}
+
+ResizableFrame *FramelessWindow::getFrame()
+{
+    return ui->frame;
+}
+
+int FramelessWindow::invFW() const
 {
     return 11;
 }
 
-int FramelessWindow::invFH()
+int FramelessWindow::invFH() const
 {
     return 11;
 }
@@ -70,7 +84,4 @@ void FramelessWindow::restore()
     layout()->setMargin(9);
 }
 
-void FramelessWindow::moveBy(int x, int y)
-{
-    move(pos().x() + x, pos().y() + y);
-}
+

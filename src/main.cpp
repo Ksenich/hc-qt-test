@@ -6,6 +6,7 @@
 #include "header.h"
 #include "framelesswindow.h"
 #include "centralwidget.h"
+#include "mainwindow.h"
 
 QString orgName("Jobless corps");
 QString prodName("hc-qt-test");
@@ -15,9 +16,7 @@ int main(int argc, char** argv){
     QApplication app(argc, argv);
     QSettings settings(orgName, prodName);
     setDefaultSettings(settings);
-    //MainWindow mw;;
-    CentralWidget mw;
-    //header mw;
+    MainWindow mw;
     mw.show();
     app.exec();
     return 0;
